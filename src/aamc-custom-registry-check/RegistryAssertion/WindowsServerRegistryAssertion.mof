@@ -1,0 +1,47 @@
+/*
+@TargetNode='WindowsServerRegistryAssertion'
+@GeneratedBy=weixzha
+@GenerationDate=09/25/2023 21:03:25
+@GenerationHost=WEIXIAN-SB3
+*/
+
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+Key = "HKEY\\2";
+ Ensure = "Present";
+ ResourceID = "[Registry]RegistryAssertion_0";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::34::13::Registry";
+ ValueName = "1";
+ ModuleName = "PSDscResources";
+ ModuleVersion = "2.12.0.0";
+ ConfigurationName = "RegistryAssertion";
+};
+instance of MSFT_RegistryResource as $MSFT_RegistryResource2ref
+{
+Key = "HKEY\\1";
+ Ensure = "Present";
+ ResourceID = "[Registry]RegistryAssertion_1";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::34::13::Registry";
+ ValueName = "1";
+ ModuleName = "PSDscResources";
+ ModuleVersion = "2.12.0.0";
+ ConfigurationName = "RegistryAssertion";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="weixzha";
+
+                        GenerationDate="09/25/2023 21:03:25";
+
+                        GenerationHost="WEIXIAN-SB3";
+
+                        Name="RegistryAssertion";
+
+                    };
