@@ -9,13 +9,15 @@ Configuration RegistryAssertion
         [Parameter(Mandatory=$false)]
         [PSCustomObject[]] $Registries =  @(
             @{
-                Key     = "HKEY\2"
-                Value   = "1"
+                Key     = "HKEY_LOCAL_MACHINE\SOFTWARE\7-Zip"
+                ValueName = "Path"
+                ValueData   = "C:\Program Files\7-Zip\"
                 Ensure  = "Present"
             },
             @{
-                Key     = "HKEY\1"
-                Value   = "1"
+                Key     = "HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\Installer"
+                ValueName = "UWP_APP_PACKAGE_FULLNAME"
+                ValueData   = "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r"
                 Ensure  = "Present"
             }
         )
@@ -26,7 +28,7 @@ Configuration RegistryAssertion
     #Import-DscResource -Name 'Registry' -ModuleName 'PSDscResources'
     
     $i = 0
-    Node WindowsServerRegistryAssertion {
+    Node localhost {
         foreach ($reg in $Registries)
         {       
         
@@ -35,7 +37,8 @@ Configuration RegistryAssertion
             {
                 Ensure      = $reg.Ensure
                 Key         = $reg.Key
-                ValueName   = $reg.Value
+                ValueName   = $reg.ValueName
+                ValueData   = $reg.ValueData
             }
 
             $i += 1
@@ -43,5 +46,5 @@ Configuration RegistryAssertion
     }
 }
 
-RegistryAssertion
+RegistryAssertion -OutputPath ./output -Verbose;
 
