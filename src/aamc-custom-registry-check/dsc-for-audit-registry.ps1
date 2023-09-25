@@ -20,13 +20,13 @@ Configuration RegistryAssertion
             }
         )
     )
-
-    Install-Module PSDscResources
-   # Import-DscResource -ModuleName PSDscResources
+    
+    
+   Import-DscResource -ModuleName PSDscResources
     #Import-DscResource -Name 'Registry' -ModuleName 'PSDscResources'
     
     $i = 0
-    Node localhost {
+    Node WindowsServerRegistryAssertion {
         foreach ($reg in $Registries)
         {       
         
