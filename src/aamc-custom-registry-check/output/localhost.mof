@@ -1,30 +1,36 @@
 /*
-@TargetNode='WindowsServerRegistryAssertion'
+@TargetNode='localhost'
 @GeneratedBy=weixzha
-@GenerationDate=09/25/2023 21:03:25
+@GenerationDate=09/25/2023 21:26:26
 @GenerationHost=WEIXIAN-SB3
 */
 
 instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
 {
-Key = "HKEY\\2";
- Ensure = "Present";
- ResourceID = "[Registry]RegistryAssertion_0";
- SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::34::13::Registry";
- ValueName = "1";
+ValueData = {
+    "C:\\Program Files\\7-Zip\\"
+};
  ModuleName = "PSDscResources";
- ModuleVersion = "2.12.0.0";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::36::13::Registry";
+ ValueName = "Path";
+ Ensure = "Present";
+ ModuleVersion = "2.12.0.0";
+ ResourceID = "[Registry]RegistryAssertion_0";
+ Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip";
  ConfigurationName = "RegistryAssertion";
 };
 instance of MSFT_RegistryResource as $MSFT_RegistryResource2ref
 {
-Key = "HKEY\\1";
- Ensure = "Present";
- ResourceID = "[Registry]RegistryAssertion_1";
- SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::34::13::Registry";
- ValueName = "1";
+ValueData = {
+    "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r"
+};
  ModuleName = "PSDscResources";
- ModuleVersion = "2.12.0.0";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::36::13::Registry";
+ ValueName = "UWP_APP_PACKAGE_FULLNAME";
+ Ensure = "Present";
+ ModuleVersion = "2.12.0.0";
+ ResourceID = "[Registry]RegistryAssertion_1";
+ Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer";
  ConfigurationName = "RegistryAssertion";
 };
 instance of OMI_ConfigurationDocument
@@ -38,7 +44,7 @@ instance of OMI_ConfigurationDocument
 
                         Author="weixzha";
 
-                        GenerationDate="09/25/2023 21:03:25";
+                        GenerationDate="09/25/2023 21:26:26";
 
                         GenerationHost="WEIXIAN-SB3";
 

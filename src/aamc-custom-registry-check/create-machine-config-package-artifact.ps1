@@ -1,7 +1,7 @@
 # Create a package that will only audit compliance
 $params = @{
     Name          = 'RegistryAssertion'
-    Configuration = './RegistryAssertion/WindowsServerRegistryAssertion.mof'
+    Configuration = './output/localhost.mof'
     Type          = 'Audit'
     Force         = $true
 }
