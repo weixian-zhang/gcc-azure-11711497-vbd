@@ -2,7 +2,7 @@
 
 Configuration RegistryAssertion
 {
-    # parameters will be override by policy definition as documented in below link
+    # default parameters will be override by policy definition as documented in below link
     # https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#using-parameters-in-custom-machine-configuration-policy-definitions
     param
     (
@@ -23,16 +23,11 @@ Configuration RegistryAssertion
         )
     )
     
-    
-   Import-DscResource -ModuleName PSDscResources
-    #Import-DscResource -Name 'Registry' -ModuleName 'PSDscResources'
-    
-    $i = 0
+    Import-DscResource -ModuleName PSDscResources
+
     Node localhost {
         foreach ($reg in $Registries)
         {       
-        
-    
             Registry "RegistryAssertion_$($i.ToString())"
             {
                 Ensure      = $reg.Ensure
@@ -40,8 +35,6 @@ Configuration RegistryAssertion
                 ValueName   = $reg.ValueName
                 ValueData   = $reg.ValueData
             }
-
-            $i += 1
         }
     }
 }
