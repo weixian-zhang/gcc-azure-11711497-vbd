@@ -16,7 +16,7 @@ $PolicyParameterInfo = @(
     ResourceId           = 'RegistryAssertion'
     # DSC configuration resource property name (mandatory)
     ResourcePropertyName = 'Key'
-    Type = 'Array'
+    
     # Policy parameter default value (optional)
     DefaultValue         = @"
     {
