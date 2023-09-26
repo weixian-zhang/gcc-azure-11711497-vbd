@@ -11,11 +11,11 @@ $PolicyParameterInfo = @(
     # Policy parameter description (optional)
     Description          = 'windows registry key and value to be audited'
     # DSC configuration resource type (mandatory)
-    ResourceType         = 'Registry'
+    ResourceType         = 'RegistryAssertion'
     # DSC configuration resource id (mandatory)
-    ResourceId           = 'RegistryAssertion'
+    ResourceId           = 'Registries'
     # DSC configuration resource property name (mandatory)
-    ResourcePropertyName = 'Key'
+    ResourcePropertyName = 'Registries'
     
     # Policy parameter default value (optional)
     DefaultValue         = @"

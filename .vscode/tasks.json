@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile dsc",
+            "type": "shell",
+            "command": ". .\\dsc-configuration.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            }
+        },
+        {
+            "label": "create package from .mof dsc",
+            "type": "shell",
+            "command": ".\\create-machine-config-package-artifact.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            }
+        },
+        {
+            "label": "create policy definition",
+            "type": "shell",
+            "command": ".\\create-policy-definition.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            }
+        },
+        {
+            "label": "publish policy definition",
+            "type": "shell",
+            "command": ".\\publish-policy-definition.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            }
+        }
+    ]
+}
