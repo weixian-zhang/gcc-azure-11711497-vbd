@@ -1,4 +1,4 @@
-
+$outputPath = './output/'
 
 Configuration RegistryAssertion
 {
@@ -7,37 +7,53 @@ Configuration RegistryAssertion
     param
     (
         [Parameter(Mandatory=$false)]
-        [PSCustomObject[]] $Registries =  @(
-            @{
-                Key     = "HKEY_LOCAL_MACHINE\SOFTWARE\7-Zip"
-                ValueName = "Path"
-                ValueData   = "C:\Program Files\7-Zip\"
-                Ensure  = "Present"
-            },
-            @{
-                Key     = "HKEY_LOCAL_MACHINE\SOFTWARE\Adobe\Installer"
-                ValueName = "UWP_APP_PACKAGE_FULLNAME"
-                ValueData   = "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r"
-                Ensure  = "Present"
-            }
-        )
+        [String]
+        $Registries = '{    "registries": [        {"Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip","ValueName" : "Path","ValueData"   : "C:\\Program Files\\7-Zip","Ensure"  : "Present", "Hex":    false        },        {"Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer","ValueName" : "UWP_APP_PACKAGE_FULLNAME","ValueData" : "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r","Ensure"  : "Present", "Hex":    false        }    ]}'
     )
     
     Import-DscResource -ModuleName PSDscResources
 
-    Node localhost {
-        foreach ($reg in $Registries)
-        {       
-            Registry "RegistryAssertion_$($i.ToString())"
-            {
-                Ensure      = $reg.Ensure
-                Key         = $reg.Key
-                ValueName   = $reg.ValueName
-                ValueData   = $reg.ValueData
-            }
+    $htRegs = $Registries | ConvertFrom-Json -AsHashtable
+
+    $i = 0
+    foreach ($reg in $htRegs["registries"])
+    {       
+ 
+        Registry "RegistryAssertion_{$i.ToString()}"
+        {
+            Ensure      = $reg.Ensure
+            Key         = $reg.Key
+            ValueName   = $reg.ValueName
+            ValueData   = $reg.ValueData
+            Hex         = $reg.Hex
         }
+
+        $i += 1
     }
 }
 
-RegistryAssertion -OutputPath ./output -Verbose;
+RegistryAssertion -OutputPath $outputPath -Verbose
+
+
+# param example
+# {
+#     "registries": [
+#         {
+#             "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip",
+#             "ValueName" : "Path",
+#             "ValueData"   : "C:\\Program Files\\7-Zip",
+#             "Ensure"  : "Present",
+#              "Hex":    false
+#         },
+#         {
+#             "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer",
+#             "ValueName" : "UWP_APP_PACKAGE_FULLNAME",
+#             "ValueData" : "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r",
+#             "Ensure"  : "Present",
+#              "Hex":    false
+#         }
+#     ]
+# }
+
+
 

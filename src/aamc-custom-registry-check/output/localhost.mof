@@ -1,36 +1,38 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=weixzha
-@GenerationDate=09/25/2023 21:26:26
+@GenerationDate=09/26/2023 14:07:45
 @GenerationHost=WEIXIAN-SB3
 */
 
 instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
 {
-ValueData = {
-    "C:\\Program Files\\7-Zip\\"
-};
- ModuleName = "PSDscResources";
- SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::36::13::Registry";
+Ensure = "Present";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::22::9::Registry";
+ Hex = False;
+ ResourceID = "[Registry]RegistryAssertion_{0.ToString()}";
  ValueName = "Path";
- Ensure = "Present";
+ Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip";
  ModuleVersion = "2.12.0.0";
- ResourceID = "[Registry]RegistryAssertion_0";
- Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip";
+ ModuleName = "PSDscResources";
+ ValueData = {
+    "C:\\Program Files\\7-Zip"
+};
  ConfigurationName = "RegistryAssertion";
 };
 instance of MSFT_RegistryResource as $MSFT_RegistryResource2ref
 {
-ValueData = {
-    "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r"
-};
- ModuleName = "PSDscResources";
- SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::36::13::Registry";
+Ensure = "Present";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-for-audit-registry.ps1::22::9::Registry";
+ Hex = False;
+ ResourceID = "[Registry]RegistryAssertion_{1.ToString()}";
  ValueName = "UWP_APP_PACKAGE_FULLNAME";
- Ensure = "Present";
+ Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer";
  ModuleVersion = "2.12.0.0";
- ResourceID = "[Registry]RegistryAssertion_1";
- Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer";
+ ModuleName = "PSDscResources";
+ ValueData = {
+    "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r"
+};
  ConfigurationName = "RegistryAssertion";
 };
 instance of OMI_ConfigurationDocument
@@ -44,7 +46,7 @@ instance of OMI_ConfigurationDocument
 
                         Author="weixzha";
 
-                        GenerationDate="09/25/2023 21:26:26";
+                        GenerationDate="09/26/2023 14:07:45";
 
                         GenerationHost="WEIXIAN-SB3";
 
