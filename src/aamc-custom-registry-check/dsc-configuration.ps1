@@ -16,19 +16,21 @@ Configuration RegistryAssertion
     $htRegs = $Registries | ConvertFrom-Json -AsHashtable
 
     $i = 0
-    foreach ($reg in $htRegs["registries"])
-    {       
- 
-        Registry "RegistryAssertion_{$i.ToString()}"
-        {
-            Ensure      = $reg.Ensure
-            Key         = $reg.Key
-            ValueName   = $reg.ValueName
-            ValueData   = $reg.ValueData
-            Hex         = $reg.Hex
-        }
+    Node localhost {
+        foreach ($reg in $htRegs["registries"])
+        {       
+    
+            Registry "RegistryAssertion_{$i.ToString()}"
+            {
+                Ensure      = $reg.Ensure
+                Key         = $reg.Key
+                ValueName   = $reg.ValueName
+                ValueData   = $reg.ValueData
+                Hex         = $reg.Hex
+            }
 
-        $i += 1
+            $i += 1
+        }
     }
 }
 
@@ -38,14 +40,7 @@ RegistryAssertion -OutputPath $outputPath -Verbose -Registries @"
         {
             "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip",
             "ValueName" : "Path",
-            "ValueData"   : "C:\\Program Files\\7-Zip",
-            "Ensure"  : "Present",
-             "Hex":    false
-        },
-        {
-            "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer",
-            "ValueName" : "UWP_APP_PACKAGE_FULLNAME",
-            "ValueData" : "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r",
+            "ValueData"   : "C:\\Program Files\\7-Zip\\",
             "Ensure"  : "Present",
              "Hex":    false
         }

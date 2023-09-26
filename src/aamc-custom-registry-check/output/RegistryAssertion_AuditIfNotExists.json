@@ -1,6 +1,6 @@
 {
     "properties": {
-        "displayName": "Audit Windows Registry present or absent",
+        "displayName": "Windows Registries present or absent",
         "policyType": "Custom",
         "mode": "Indexed",
         "description": "Asserts and audits against a list of supplied Windows Registry keys and values as parameters. Parameter in Json example:{    \"registries\": [{\"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\7-Zip\",\"ValueName\" : \"Path\",\"ValueData\"   : \"C:\\\\Program Files\\\\7-Zip\",\"Ensure\"  : \"Present\", \"Hex\":false}    ] }",
@@ -15,9 +15,9 @@
                     "version": "0.0.1",
                     "contentType": "Custom",
                     "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion_0.0.1.zip?sp=r&st=2023-09-26T06:14:14Z&se=2023-10-07T14:14:14Z&spr=https&sv=2022-11-02&sr=b&sig=rcZwPRQYEyjat0YHdbSX48uxgmcl3MPQQPWJFxnxnWg%3D",
-                    "contentHash": "A27381505735C510477E51736C55E9D2BA80A00CE1ABE18F3A30BD83A2879099",
+                    "contentHash": "C606C2559FA620BE14907787CCBCED4312DF9168F7354F72EC2004B13BB462B8",
                     "configurationParameter": {
-                        "Windows Registry keys and values": "[Registry]RegistryAssertion;Key"
+                        "Windows Registry keys and values": "[RegistryAssertion]param;Registries"
                     }
                 }
             },
@@ -258,7 +258,7 @@
                                         },
                                         {
                                             "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/parameterHash",
-                                            "equals": "[base64(concat('[Registry]RegistryAssertion;Key', '=', parameters('Windows Registry keys and values')))]"
+                                            "equals": "[base64(concat('[RegistryAssertion]param;Registries', '=', parameters('Windows Registry keys and values')))]"
                                         }
                                     ]
                                 }
@@ -266,5 +266,5 @@
                         }
                     }
                 },
-                "name": "bf7b1203-8ba0-46f1-872e-e1127593285c"
+                "name": "b7c8b797-445e-4da4-bec2-acb2c4e39677"
             }
