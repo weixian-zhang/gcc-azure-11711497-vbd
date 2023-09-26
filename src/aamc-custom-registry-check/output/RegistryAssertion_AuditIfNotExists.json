@@ -1,48 +1,94 @@
 {
     "properties": {
-        "displayName": "Windows Registries present or absent",
+        "displayName": "Audit Windows Registry present or absent",
         "policyType": "Custom",
         "mode": "Indexed",
-        "description": "Asserts and audits against a list of supplied Windows Registry keys and values as parameters. Parameter in Json example:{    \"registries\": [{\"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\7-Zip\",\"ValueName\" : \"Path\",\"ValueData\"   : \"C:\\\\Program Files\\\\7-Zip\",\"Ensure\"  : \"Present\", \"Hex\":false}    ] }",
-            "metadata": {
-                "category": "Guest Configuration",
+        "description": "Audits if a Windows Registry is present or absent",
+        "metadata": {
+            "category": "Guest Configuration",
+            "version": "0.0.1",
+            "requiredProviders": [
+                "Microsoft.GuestConfiguration"
+            ],
+            "guestConfiguration": {
+                "name": "RegistryAssertion",
                 "version": "0.0.1",
-                "requiredProviders": [
-                    "Microsoft.GuestConfiguration"
-                ],
-                "guestConfiguration": {
-                    "name": "RegistryAssertion",
-                    "version": "0.0.1",
-                    "contentType": "Custom",
-                    "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion_0.0.1.zip?sp=r&st=2023-09-26T06:14:14Z&se=2023-10-07T14:14:14Z&spr=https&sv=2022-11-02&sr=b&sig=rcZwPRQYEyjat0YHdbSX48uxgmcl3MPQQPWJFxnxnWg%3D",
-                    "contentHash": "C606C2559FA620BE14907787CCBCED4312DF9168F7354F72EC2004B13BB462B8",
-                    "configurationParameter": {
-                        "Windows Registry keys and values": "[RegistryAssertion]param;Registries"
-                    }
+                "contentType": "Custom",
+                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion_0.0.1.zip?sp=r&st=2023-09-26T06:14:14Z&se=2023-10-07T14:14:14Z&spr=https&sv=2022-11-02&sr=b&sig=rcZwPRQYEyjat0YHdbSX48uxgmcl3MPQQPWJFxnxnWg%3D",
+                "contentHash": "7973C150D213621D48091BD5B4EF0EC8CB578703F7BEDD44F8455089884CCB12",
+                "configurationParameter": {
+                    "Registry Key": "[Registry]RegistryAssertion;Key",
+                    "Registry ValueName": "[Registry]RegistryAssertion;ValueName",
+                    "Registry ValueData": "[Registry]RegistryAssertion;ValueData",
+                    "Ensure": "[Registry]RegistryAssertion;Ensure",
+                    "Hex": "[Registry]RegistryAssertion;Hex"
                 }
-            },
-            "parameters": {
-                "IncludeArcMachines": {
-                    "type": "string",
-                    "metadata": {
-                        "displayName": "Include Arc connected machines",
-                        "description": "By selecting this option, you agree to be charged monthly per Arc connected machine.",
-                        "portalReview": "true"
-                    },
-                    "allowedValues": [
-                        "true",
-                        "false"
-                    ],
-                    "defaultValue": "false"
+            }
+        },
+        "parameters": {
+            "IncludeArcMachines": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Include Arc connected machines",
+                    "description": "By selecting this option, you agree to be charged monthly per Arc connected machine.",
+                    "portalReview": "true"
                 },
-                "Windows Registry keys and values": {
+                "allowedValues": [
+                    "true",
+                    "false"
+                ],
+                "defaultValue": "false"
+            },
+            "Registry Key": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Registry Key",
+                    "description": "Registry Key"
+                },
+                "defaultValue": "",
+                "allowedValues": []
+                },
+                "Registry ValueName": {
                     "type": "string",
                     "metadata": {
-                        "displayName": "Windows Registry keys and values",
-                        "description": "windows registry key and value to be audited"
+                        "displayName": "Registry ValueName",
+                        "description": "Registry ValueName"
                     },
-                    "defaultValue": "    {\r\n      \"registries\": [\r\n          {\r\n              \"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\7-Zip\",\r\n              \"ValueName\" : \"Path\",\r\n              \"ValueData\"   : \"C:\\\\Program Files\\\\7-Zip\",\r\n              \"Ensure\"  : \"Present\",\r\n               \"Hex\":   false\r\n          },\r\n          {\r\n              \"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Adobe\\\\Installer\",\r\n              \"ValueName\" : \"UWP_APP_PACKAGE_FULLNAME\",\r\n              \"ValueData\" : \"ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r\",\r\n              \"Ensure\"  : \"Present\",\r\n               \"Hex\":   false\r\n          }\r\n      ]\r\n  } ",
+                    "defaultValue": "",
+                    "allowedValues": []
+                    },
+                    "Registry ValueData": {
+                        "type": "string",
+                        "metadata": {
+                            "displayName": "Registry ValueData",
+                            "description": "Registry ValueData"
+                        },
+                        "defaultValue": "",
                         "allowedValues": []
+                        },
+                        "Ensure": {
+                            "type": "string",
+                            "metadata": {
+                                "displayName": "Ensure",
+                                "description": "Ensure either Registry Key/ValueData is Present | Absent"
+                            },
+                            "defaultValue": "Present",
+                            "allowedValues": [
+                                "Present",
+                                "Absent"
+                            ]
+                        },
+                        "Hex": {
+                            "type": "string",
+                            "metadata": {
+                                "displayName": "Is Value Hex",
+                                "description": "is the registry value data a hexidecimal value"
+                            },
+                            "defaultValue": "False",
+                            "allowedValues": [
+                                "True",
+                                "False"
+                            ]
                         }
                     },
                     "policyRule": {
@@ -258,7 +304,7 @@
                                         },
                                         {
                                             "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/parameterHash",
-                                            "equals": "[base64(concat('[RegistryAssertion]param;Registries', '=', parameters('Windows Registry keys and values')))]"
+                                            "equals": "[base64(concat('[Registry]RegistryAssertion;Key', '=', parameters('Registry Key'), ',', '[Registry]RegistryAssertion;ValueName', '=', parameters('Registry ValueName'), ',', '[Registry]RegistryAssertion;ValueData', '=', parameters('Registry ValueData'), ',', '[Registry]RegistryAssertion;Ensure', '=', parameters('Ensure'), ',', '[Registry]RegistryAssertion;Hex', '=', parameters('Hex')))]"
                                         }
                                     ]
                                 }
@@ -266,5 +312,5 @@
                         }
                     }
                 },
-                "name": "b7c8b797-445e-4da4-bec2-acb2c4e39677"
+                "name": "83c7c4e4-a0cd-4417-871c-cf21c9f09b4a"
             }

@@ -6,48 +6,93 @@ $contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryA
 
 $PolicyParameterInfo = @(
   @{
-    Name    = 'Windows Registry keys and values'
-    DisplayName          = 'Windows Registry keys and values'
+    Name    = 'Registry Key'
+    DisplayName          = 'Registry Key'
     # Policy parameter description (optional)
-    Description          = 'windows registry key and value to be audited'
+    Description          = 'Registry Key'
     # DSC configuration resource type (mandatory)
-    ResourceType         = 'RegistryAssertion'
+    ResourceType         = 'Registry'
     # DSC configuration resource id (mandatory)
-    ResourceId           = 'Registries'
+    ResourceId           = 'RegistryAssertion'
     # DSC configuration resource property name (mandatory)
-    ResourcePropertyName = 'Registries'
+    ResourcePropertyName = 'Key'
     
     # Policy parameter default value (optional)
-    DefaultValue         = @"
-    {
-      "registries": [
-          {
-              "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip",
-              "ValueName" : "Path",
-              "ValueData"   : "C:\\Program Files\\7-Zip",
-              "Ensure"  : "Present",
-               "Hex":    false
-          },
-          {
-              "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer",
-              "ValueName" : "UWP_APP_PACKAGE_FULLNAME",
-              "ValueData" : "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r",
-              "Ensure"  : "Present",
-               "Hex":    false
-          }
-      ]
-  } 
-"@
-    # Policy parameter allowed values (optional)
+    DefaultValue         = ""
     AllowedValues        = @()
-  })
+  },
+  @{
+    Name    = 'Registry ValueName'
+    DisplayName          = 'Registry ValueName'
+    # Policy parameter description (optional)
+    Description          = 'Registry ValueName'
+    # DSC configuration resource type (mandatory)
+    ResourceType         = 'Registry'
+    # DSC configuration resource id (mandatory)
+    ResourceId           = 'RegistryAssertion'
+    # DSC configuration resource property name (mandatory)
+    ResourcePropertyName = 'ValueName'
+    
+    # Policy parameter default value (optional)
+    DefaultValue         = ""
+    AllowedValues        = @()
+  },
+  @{
+    Name    = 'Registry ValueData'
+    DisplayName          = 'Registry ValueData'
+    # Policy parameter description (optional)
+    Description          = 'Registry ValueData'
+    # DSC configuration resource type (mandatory)
+    ResourceType         = 'Registry'
+    # DSC configuration resource id (mandatory)
+    ResourceId           = 'RegistryAssertion'
+    # DSC configuration resource property name (mandatory)
+    ResourcePropertyName = 'ValueData'
+    
+    # Policy parameter default value (optional)
+    DefaultValue         = ""
+    AllowedValues        = @()
+  },
+  @{
+    Name    = 'Ensure'
+    DisplayName          = 'Ensure'
+    # Policy parameter description (optional)
+    Description          = 'Ensure either Registry Key/ValueData is Present | Absent'
+    # DSC configuration resource type (mandatory)
+    ResourceType         = 'Registry'
+    # DSC configuration resource id (mandatory)
+    ResourceId           = 'RegistryAssertion'
+    # DSC configuration resource property name (mandatory)
+    ResourcePropertyName = 'Ensure'
+    
+    # Policy parameter default value (optional)
+    DefaultValue         = "Present"
+    AllowedValues        = @("Present", "Absent")
+  },
+  @{
+    Name    = "Hex"
+    DisplayName          = 'Is Value Hex'
+    # Policy parameter description (optional)
+    Description          = 'is the registry value data a hexidecimal value'
+    # DSC configuration resource type (mandatory)
+    ResourceType         = 'Registry'
+    # DSC configuration resource id (mandatory)
+    ResourceId           = 'RegistryAssertion'
+    # DSC configuration resource property name (mandatory)
+    ResourcePropertyName = 'Hex'
+    Type                 = 'boolean'
+    # Policy parameter default value (optional)
+    DefaultValue         = $false
+    AllowedValues        = @($true, $false)
+  }
+)
 
 # ...and then passed into the `New-GuestConfigurationPolicy` cmdlet
 $PolicyConfig   = @{
   PolicyId      = $guid
   ContentUri    = $contentUri
-  DisplayName   = 'Windows Registries present or absent'
-  Description   = 'Asserts and audits against a list of supplied Windows Registry keys and values as parameters. Parameter in Json example:{    "registries": [{"Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip","ValueName" : "Path","ValueData"   : "C:\\Program Files\\7-Zip","Ensure"  : "Present", "Hex":false}    ] }'
+  DisplayName   = 'Audit Windows Registry present or absent'
+  Description   = 'Audits if a Windows Registry is present or absent'
   Path          = './output'
   Platform      = 'Windows'
   Parameter     = $PolicyParameterInfo
