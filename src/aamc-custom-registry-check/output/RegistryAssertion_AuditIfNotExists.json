@@ -1,6 +1,6 @@
 {
     "properties": {
-        "displayName": "Windows Registry Present or Absent",
+        "displayName": "Audit Windows Registry present or absent",
         "policyType": "Custom",
         "mode": "Indexed",
         "description": "Asserts and audits against a list of supplied Windows Registry keys and values as parameters. Parameter in Json example:{    \"registries\": [{\"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\7-Zip\",\"ValueName\" : \"Path\",\"ValueData\"   : \"C:\\\\Program Files\\\\7-Zip\",\"Ensure\"  : \"Present\", \"Hex\":false}    ] }",
@@ -15,7 +15,7 @@
                     "version": "0.0.1",
                     "contentType": "Custom",
                     "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion_0.0.1.zip?sp=r&st=2023-09-26T06:14:14Z&se=2023-10-07T14:14:14Z&spr=https&sv=2022-11-02&sr=b&sig=rcZwPRQYEyjat0YHdbSX48uxgmcl3MPQQPWJFxnxnWg%3D",
-                    "contentHash": "E6BF1CB1FD42ABD15392080CA57E4DD2EC9539B4756710F8D51B8A8806BF1854",
+                    "contentHash": "A27381505735C510477E51736C55E9D2BA80A00CE1ABE18F3A30BD83A2879099",
                     "configurationParameter": {
                         "Windows Registry keys and values": "[Registry]RegistryAssertion;Key"
                     }
@@ -41,7 +41,7 @@
                         "displayName": "Windows Registry keys and values",
                         "description": "windows registry key and value to be audited"
                     },
-                    "defaultValue": "{\"registries\":[]}",
+                    "defaultValue": "    {\r\n      \"registries\": [\r\n          {\r\n              \"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\7-Zip\",\r\n              \"ValueName\" : \"Path\",\r\n              \"ValueData\"   : \"C:\\\\Program Files\\\\7-Zip\",\r\n              \"Ensure\"  : \"Present\",\r\n               \"Hex\":   false\r\n          },\r\n          {\r\n              \"Key\" : \"HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Adobe\\\\Installer\",\r\n              \"ValueName\" : \"UWP_APP_PACKAGE_FULLNAME\",\r\n              \"ValueData\" : \"ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r\",\r\n              \"Ensure\"  : \"Present\",\r\n               \"Hex\":   false\r\n          }\r\n      ]\r\n  } ",
                         "allowedValues": []
                         }
                     },
@@ -266,5 +266,5 @@
                         }
                     }
                 },
-                "name": "9c59ecb7-7d28-453c-914a-b669c91773de"
+                "name": "bf7b1203-8ba0-46f1-872e-e1127593285c"
             }

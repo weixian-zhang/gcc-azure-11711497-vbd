@@ -18,7 +18,26 @@ $PolicyParameterInfo = @(
     ResourcePropertyName = 'Key'
     Type = 'Array'
     # Policy parameter default value (optional)
-    DefaultValue         = '{"registries":[]}'
+    DefaultValue         = @"
+    {
+      "registries": [
+          {
+              "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip",
+              "ValueName" : "Path",
+              "ValueData"   : "C:\\Program Files\\7-Zip",
+              "Ensure"  : "Present",
+               "Hex":    false
+          },
+          {
+              "Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\Installer",
+              "ValueName" : "UWP_APP_PACKAGE_FULLNAME",
+              "ValueData" : "ReaderNotificationClient_1.0.4.0_x86__e1rzdqpraam7r",
+              "Ensure"  : "Present",
+               "Hex":    false
+          }
+      ]
+  } 
+"@
     # Policy parameter allowed values (optional)
     AllowedValues        = @()
   })
@@ -27,7 +46,7 @@ $PolicyParameterInfo = @(
 $PolicyConfig   = @{
   PolicyId      = $guid
   ContentUri    = $contentUri
-  DisplayName   = 'Windows Registry Present or Absent'
+  DisplayName   = 'Audit Windows Registry present or absent'
   Description   = 'Asserts and audits against a list of supplied Windows Registry keys and values as parameters. Parameter in Json example:{    "registries": [{"Key" : "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip","ValueName" : "Path","ValueData"   : "C:\\Program Files\\7-Zip","Ensure"  : "Present", "Hex":false}    ] }'
   Path          = './output'
   Platform      = 'Windows'
