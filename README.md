@@ -12,6 +12,9 @@
 * [Install PowerShell 7](https://github.com/PowerShell/PowerShell/releases/tag/v7.1.3)
 * [install Az powershell module](https://learn.microsoft.com/en-us/powershell/azure/install-azps-windows?view=azps-10.3.0&tabs=powershell&pivots=windows-psgallery#installation)
 * [Install GuestConfiguration module](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-set-up-authoring-environment#install-the-module-from-the-powershell-gallery)
+* Within PosH scripting environment:
+  * Install-Module GuestConfiguration -Verbose -Force
+  * Install-Module PSDscResources -Verbose -Force
 
 ### Steps to create a custom Azure Automanage Machine Configuration
 As describe in [Azure doc](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition)
