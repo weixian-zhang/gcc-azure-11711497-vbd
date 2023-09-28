@@ -1,10 +1,12 @@
 # create config package artifact
 # https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-package#create-a-configuration-package-artifact
 
+
+
 $guid = ([guid]::NewGuid()).ToString()
 $contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T02%3A14%3A18Z&sr=b&sp=ra&sig=ZjT%2FfCxLM0L3DOEh8keq0oY2ozxz%2FUXbCnmHmGm9ces%3D'
 
-$PolicyParameterInfo = @( @{}
+$PolicyParameterInfo = @(
   @{
     Name    = 'Registry Key'
     DisplayName          = 'Registry Key'

@@ -1,0 +1,327 @@
+{
+    "properties": {
+        "displayName": "Audit Windows Registry present or absent",
+        "policyType": "Custom",
+        "mode": "Indexed",
+        "description": "Audits if a Windows Registry is present or absent",
+        "metadata": {
+            "category": "Guest Configuration",
+            "version": "0.0.1",
+            "requiredProviders": [
+                "Microsoft.GuestConfiguration"
+            ],
+            "guestConfiguration": {
+                "name": "RegistryAssertion",
+                "version": "0.0.1",
+                "contentType": "Custom",
+                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T02%3A14%3A18Z&sr=b&sp=ra&sig=ZjT%2FfCxLM0L3DOEh8keq0oY2ozxz%2FUXbCnmHmGm9ces%3D",
+                "contentHash": "35D04667352A0C7BAD9090EB57AEE1A455511E20AED0F220CDF09127AABD3DDA",
+                "configurationParameter": {
+                    "Registry Key": "[Registry]RegistryAssertion;Key",
+                    "Registry ValueName": "[Registry]RegistryAssertion;ValueName",
+                    "Registry ValueData": "[Registry]RegistryAssertion;ValueData",
+                    "Ensure": "[Registry]RegistryAssertion;Ensure"
+                }
+            }
+        },
+        "parameters": {
+            "IncludeArcMachines": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Include Arc connected machines",
+                    "description": "By selecting this option, you agree to be charged monthly per Arc connected machine.",
+                    "portalReview": "true"
+                },
+                "allowedValues": [
+                    "true",
+                    "false"
+                ],
+                "defaultValue": "false"
+            },
+            "Registry Key": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Registry Key",
+                    "description": "Registry Key"
+                },
+                "defaultValue": "",
+                "allowedValues": []
+                },
+                "Registry ValueName": {
+                    "type": "string",
+                    "metadata": {
+                        "displayName": "Registry ValueName",
+                        "description": "Registry ValueName"
+                    },
+                    "defaultValue": "",
+                    "allowedValues": []
+                    },
+                    "Registry ValueData": {
+                        "type": "string",
+                        "metadata": {
+                            "displayName": "Registry ValueData",
+                            "description": "Registry ValueData"
+                        },
+                        "defaultValue": "",
+                        "allowedValues": []
+                        },
+                        "Ensure": {
+                            "type": "string",
+                            "metadata": {
+                                "displayName": "Ensure",
+                                "description": "Ensure either Registry Key/ValueData is Present | Absent"
+                            },
+                            "defaultValue": "Present",
+                            "allowedValues": [
+                                "Present",
+                                "Absent"
+                            ]
+                        }
+                    },
+                    "policyRule": {
+                        "if": {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "anyOf": [
+                                                {
+                                                    "field": "type",
+                                                    "equals": "Microsoft.Compute/virtualMachines"
+                                                },
+                                                {
+                                                    "field": "type",
+                                                    "equals": "Microsoft.Compute/virtualMachineScaleSets"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "field": "tags['aks-managed-orchestrator']",
+                                            "exists": "false"
+                                        },
+                                        {
+                                            "field": "tags['aks-managed-poolName']",
+                                            "exists": "false"
+                                        },
+                                        {
+                                            "anyOf": [
+                                                {
+                                                    "field": "Microsoft.Compute/imagePublisher",
+                                                    "in": [
+                                                        "esri",
+                                                        "incredibuild",
+                                                        "MicrosoftDynamicsAX",
+                                                        "MicrosoftSharepoint",
+                                                        "MicrosoftVisualStudio",
+                                                        "MicrosoftWindowsDesktop",
+                                                        "MicrosoftWindowsServerHPCPack"
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "MicrosoftWindowsServer"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageSKU",
+                                                            "notLike": "2008*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "MicrosoftSQLServer"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "notLike": "SQL2008*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "microsoft-dsvm"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "like": "dsvm-win*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "microsoft-ads"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "in": [
+                                                                "standard-data-science-vm",
+                                                                "windows-data-science-vm"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "batch"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "equals": "rendering-windows2016"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "center-for-internet-security-inc"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "like": "cis-windows-server-201*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "pivotal"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "like": "bosh-windows-server*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "Microsoft.Compute/imagePublisher",
+                                                            "equals": "cloud-infrastructure-services"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.Compute/imageOffer",
+                                                            "like": "ad*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "anyOf": [
+                                                                {
+                                                                    "field": "Microsoft.Compute/virtualMachines/osProfile.windowsConfiguration",
+                                                                    "exists": true
+                                                                },
+                                                                {
+                                                                    "field": "Microsoft.Compute/virtualMachines/storageProfile.osDisk.osType",
+                                                                    "like": "Windows*"
+                                                                },
+                                                                {
+                                                                    "field": "Microsoft.Compute/VirtualMachineScaleSets/osProfile.windowsConfiguration",
+                                                                    "exists": true
+                                                                },
+                                                                {
+                                                                    "field": "Microsoft.Compute/virtualMachineScaleSets/virtualMachineProfile.storageProfile.osDisk.osType",
+                                                                    "like": "Windows*"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "anyOf": [
+                                                                {
+                                                                    "field": "Microsoft.Compute/imageSKU",
+                                                                    "exists": false
+                                                                },
+                                                                {
+                                                                    "allOf": [
+                                                                        {
+                                                                            "field": "Microsoft.Compute/imageOffer",
+                                                                            "notLike": "SQL2008*"
+                                                                        },
+                                                                        {
+                                                                            "field": "Microsoft.Compute/imageSKU",
+                                                                            "notLike": "2008*"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "value": "[parameters('IncludeArcMachines')]",
+                                            "equals": true
+                                        },
+                                        {
+                                            "anyOf": [
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "type",
+                                                            "equals": "Microsoft.HybridCompute/machines"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.HybridCompute/imageOffer",
+                                                            "like": "windows*"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "allOf": [
+                                                        {
+                                                            "field": "type",
+                                                            "equals": "Microsoft.ConnectedVMwarevSphere/virtualMachines"
+                                                        },
+                                                        {
+                                                            "field": "Microsoft.ConnectedVMwarevSphere/virtualMachines/osProfile.osType",
+                                                            "like": "windows*"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "then": {
+                            "effect": "auditIfNotExists",
+                            "details": {
+                                "type": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+                                "name": "[concat('RegistryAssertion$pid', uniqueString(policy().assignmentId, policy().definitionReferenceId))]",
+                                "existenceCondition": {
+                                    "allOf": [
+                                        {
+                                            "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/complianceStatus",
+                                            "equals": "Compliant"
+                                        },
+                                        {
+                                            "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/parameterHash",
+                                            "equals": "[base64(concat('[Registry]RegistryAssertion;Key', '=', parameters('Registry Key'), ',', '[Registry]RegistryAssertion;ValueName', '=', parameters('Registry ValueName'), ',', '[Registry]RegistryAssertion;ValueData', '=', parameters('Registry ValueData'), ',', '[Registry]RegistryAssertion;Ensure', '=', parameters('Ensure')))]"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "name": "5d23f292-b414-45fa-9dcb-7747d710fa03"
+            }
