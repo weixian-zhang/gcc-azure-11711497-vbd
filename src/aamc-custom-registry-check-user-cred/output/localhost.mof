@@ -1,0 +1,49 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=weixzha
+@GenerationDate=09/28/2023 12:06:54
+@GenerationHost=WEIXIAN-SB3
+*/
+
+instance of MSFT_Credential as $MSFT_Credential1ref
+{
+Password = "-----BEGIN CMS-----\nMIIBswYJKoZIhvcNAQcDoIIBpDCCAaACAQAxggFbMIIBVwIBADA/MCsxKTAnBgNVBAMMIEF6QXV0\nb21hdGlvbk1hY2hpbmVDb25maWdNb2ZDZXJ0AhBiFoefgW9EnUkAMLYBIHSeMA0GCSqGSIb3DQEB\nAQUABIIBAJE/BoiGQ8mmw5LSachqaV3o7TQrPgOFVgnXNBWGVXZNdjkmoSHXBWshywuqzeGrSTkq\nM2cPzLsePCbV5z5MslO+cmDOXzcZYL9cBIElPuz2tnB4XXB4p1SDBmVozgiWJM+G85CySMg30v19\n3NnHrQcRs4rvNZ1wRFDxwQ6rFotgt85Or1wCXk//GKsuO3Na8n82fnitZ82JooAXyh1gTnsPI1Bt\n9Pqapr9wzy/oiwUsTTPhIYs8Fk616Kxt5/ogBJWN145ZH7sGyDOqz5dOKVwA1tSfrjLNdHHclWVp\n7+77VgA+wA10dfhh6O6AMOWg4CZAq057kH/1bagaP6h1MBcwPAYJKoZIhvcNAQcBMB0GCWCGSAFl\nAwQBKgQQv2/i0XNAdn1vdz2mHDbgsoAQMrnov2+hzXpd0Te9v5bK9Q==\n-----END CMS-----";
+ UserName = "Get-Credential";
+
+};
+
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-configuration.ps1::16::9::Registry";
+ ResourceID = "[Registry]RegistryAssertion";
+ ValueData = {
+    "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\kbdclass"
+};
+ PsDscRunAsCredential = $MSFT_Credential1ref;
+ Ensure = "Present";
+ Key = "HKEY_LOCAL_MACHINE\\HARDWARE\\DEVICEMAP\\KeyboardClass";
+ ValueName = "\\Device\\KeyboardClass0";
+ ModuleVersion = "2.12.0.0";
+ ModuleName = "PSDscResources";
+ ConfigurationName = "RegistryAssertion";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "2.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="weixzha";
+
+                        GenerationDate="09/28/2023 12:06:54";
+
+                        GenerationHost="WEIXIAN-SB3";
+
+                        ContentType="PasswordEncrypted";
+
+                        Name="RegistryAssertion";
+
+                    };
