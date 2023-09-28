@@ -1,0 +1,27 @@
+{
+    "allOf": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Compute/virtualMachines"
+      },
+      {
+        "field": "type",
+        "equals": "Microsoft.Compute/virtualMachineScaleSets"
+      },
+      {
+        "anyOf": [
+          {
+            "field": "tags['aamc-inspect']",
+            "exists": true
+          },
+          {
+            "field": "tags['aamc-aamc-registry-chrome-inspect']",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+
+$hash = (Get-FileHash .\output\RegistryAssertion.zip).Hash
+Write-Output $hash

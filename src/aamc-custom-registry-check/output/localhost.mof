@@ -1,23 +1,22 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=weixzha
-@GenerationDate=09/26/2023 20:36:55
+@GenerationDate=09/28/2023 10:02:55
 @GenerationHost=WEIXIAN-SB3
 */
 
 instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
 {
-ResourceID = "[Registry]RegistryAssertion";
- Key = "HKEY_LOCAL_MACHINE\\SOFTWARE\\7-Zip";
- Hex = False;
- SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-configuration.ps1::17::9::Registry";
- Ensure = "Present";
+ModuleVersion = "2.12.0.0";
+ Key = "HKEY_LOCAL_MACHINE\\HARDWARE\\DEVICEMAP\\KeyboardClass";
  ValueData = {
-    "C:\\Program Files\\7-Zip\\"
+    "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\kbdclass"
 };
- ModuleVersion = "2.12.0.0";
+ ValueName = "\\Device\\KeyboardClass0";
+ ResourceID = "[Registry]RegistryAssertion";
  ModuleName = "PSDscResources";
- ValueName = "Path";
+ Ensure = "Present";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-configuration.ps1::10::5::Registry";
  ConfigurationName = "RegistryAssertion";
 };
 instance of OMI_ConfigurationDocument
@@ -31,7 +30,7 @@ instance of OMI_ConfigurationDocument
 
                         Author="weixzha";
 
-                        GenerationDate="09/26/2023 20:36:56";
+                        GenerationDate="09/28/2023 10:02:55";
 
                         GenerationHost="WEIXIAN-SB3";
 

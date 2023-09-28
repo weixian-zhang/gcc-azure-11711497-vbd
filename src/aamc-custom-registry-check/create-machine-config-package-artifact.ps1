@@ -1,4 +1,5 @@
-# Create a package that will only audit compliance
+# Create a machine config package that will only audit compliance
+
 $params = @{
     Name          = 'RegistryAssertion'
     Configuration = './output/localhost.mof'
@@ -7,3 +8,6 @@ $params = @{
     Version       = "0.0.1"
 }
 New-GuestConfigurationPackage @params
+
+
+

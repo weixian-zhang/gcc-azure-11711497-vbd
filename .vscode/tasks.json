@@ -34,6 +34,17 @@
             "options": {
                 "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
             }
-        }
+        },
+        {
+            "label": "create and move package artifact to output",
+            "type": "shell",
+            "command": "move-item ${workspaceFolder}/src/aamc-custom-registry-check/RegistryAssertion.zip ${workspaceFolder}/src/aamc-custom-registry-check/output/RegistryAssertion.zip -Force",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            },
+            "dependsOn":[
+                "create package from .mof dsc"
+            ]
+        },
     ]
 }
