@@ -14,8 +14,8 @@
                 "name": "RegistryAssertion",
                 "version": "0.0.1",
                 "contentType": "Custom",
-                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T02%3A14%3A18Z&sr=b&sp=ra&sig=ZjT%2FfCxLM0L3DOEh8keq0oY2ozxz%2FUXbCnmHmGm9ces%3D",
-                "contentHash": "35D04667352A0C7BAD9090EB57AEE1A455511E20AED0F220CDF09127AABD3DDA",
+                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T07%3A16%3A08Z&sr=b&sp=ra&sig=l5nfsY6haprZUy17oGDS8oPfC68bo7OolQ%2BLnzilFV8%3D",
+                "contentHash": "0D9C97D0BA8FA0488A6BB444B26ADA8B2F4B516D5E16750B5C2B57138FF13EC9",
                 "configurationParameter": {
                     "Registry Key": "[Registry]RegistryAssertion;Key",
                     "Registry ValueName": "[Registry]RegistryAssertion;ValueName",
@@ -323,5 +323,5 @@
                         }
                     }
                 },
-                "name": "5d23f292-b414-45fa-9dcb-7747d710fa03"
+                "name": "3079ed55-27d4-46c2-80fe-b07d18048159"
             }

@@ -4,7 +4,7 @@
 
 
 $guid = ([guid]::NewGuid()).ToString()
-$contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T02%3A14%3A18Z&sr=b&sp=ra&sig=ZjT%2FfCxLM0L3DOEh8keq0oY2ozxz%2FUXbCnmHmGm9ces%3D'
+$contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T07%3A16%3A08Z&sr=b&sp=ra&sig=l5nfsY6haprZUy17oGDS8oPfC68bo7OolQ%2BLnzilFV8%3D'
 
 $PolicyParameterInfo = @(
   @{

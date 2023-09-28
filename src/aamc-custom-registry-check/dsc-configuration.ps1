@@ -5,10 +5,6 @@ $outputPath = './output/'
 
 Configuration RegistryAssertion
 {
-    param(
-    [PSCredential]$VMCred
-    )
-
     Import-DscResource -ModuleName PSDscResources
 
    
@@ -17,15 +13,11 @@ Configuration RegistryAssertion
         Ensure      = 'Present'
         Key         = 'HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\KeyboardClass'
         ValueName   = '\Device\KeyboardClass0'
-        ValueData   = '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\kbdclass'
-        PsDscRunAsCredential =   $VMCred
-        
+        ValueData   = '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\kbdclass'        
     }
-
-
 }
 
-
+`
 RegistryAssertion -OutputPath $outputPath -Verbose
 
 
