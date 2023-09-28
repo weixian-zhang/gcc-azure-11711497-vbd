@@ -20,6 +20,14 @@
             }
         },
         {
+            "label": "upload package to storage",
+            "type": "shell",
+            "command": ".\\publish-package-to-storage.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/aamc-custom-registry-check"
+            }
+        },
+        {
             "label": "create policy definition",
             "type": "shell",
             "command": ".\\create-policy-definition.ps1",
