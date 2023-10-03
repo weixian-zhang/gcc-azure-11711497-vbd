@@ -4,9 +4,25 @@
 
 
 $guid = ([guid]::NewGuid()).ToString()
-$contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T07%3A16%3A08Z&sr=b&sp=ra&sig=l5nfsY6haprZUy17oGDS8oPfC68bo7OolQ%2BLnzilFV8%3D'
+$contentUri = 'https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-11-02T02%3A47%3A47Z&sr=b&sp=ra&sig=sNl14PKri4LU%2FEFaqBdp%2FD2580gSYrTpsH52p%2B9AblI%3D'
 
 $PolicyParameterInfo = @(
+  @{
+    Name    = 'Ensure'
+    DisplayName          = 'Ensure'
+    # Policy parameter description (optional)
+    Description          = 'Ensure either Registry Key/ValueData is Present | Absent'
+    # DSC configuration resource type (mandatory)
+    ResourceType         = 'Registry'
+    # DSC configuration resource id (mandatory)
+    ResourceId           = 'RegistryAssertion'
+    # DSC configuration resource property name (mandatory)
+    ResourcePropertyName = 'Ensure'
+    
+    # Policy parameter default value (optional)
+    DefaultValue         = "Present"
+    AllowedValues        = @("Present", "Absent")
+  },
   @{
     Name    = 'Registry Key'
     DisplayName          = 'Registry Key'
@@ -54,22 +70,6 @@ $PolicyParameterInfo = @(
     # Policy parameter default value (optional)
     DefaultValue         = ""
     AllowedValues        = @()
-  },
-  @{
-    Name    = 'Ensure'
-    DisplayName          = 'Ensure'
-    # Policy parameter description (optional)
-    Description          = 'Ensure either Registry Key/ValueData is Present | Absent'
-    # DSC configuration resource type (mandatory)
-    ResourceType         = 'Registry'
-    # DSC configuration resource id (mandatory)
-    ResourceId           = 'RegistryAssertion'
-    # DSC configuration resource property name (mandatory)
-    ResourcePropertyName = 'Ensure'
-    
-    # Policy parameter default value (optional)
-    DefaultValue         = "Present"
-    AllowedValues        = @("Present", "Absent")
   }
 )
 

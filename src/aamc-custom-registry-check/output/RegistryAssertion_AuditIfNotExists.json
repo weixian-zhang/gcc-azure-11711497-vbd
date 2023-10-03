@@ -14,13 +14,13 @@
                 "name": "RegistryAssertion",
                 "version": "0.0.1",
                 "contentType": "Custom",
-                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-10-28T07%3A16%3A08Z&sr=b&sp=ra&sig=l5nfsY6haprZUy17oGDS8oPfC68bo7OolQ%2BLnzilFV8%3D",
-                "contentHash": "0D9C97D0BA8FA0488A6BB444B26ADA8B2F4B516D5E16750B5C2B57138FF13EC9",
+                "contentUri": "https://strguramachineconfig.blob.core.windows.net/aamc/RegistryAssertion.zip?sv=2023-01-03&se=2023-11-02T02%3A47%3A47Z&sr=b&sp=ra&sig=sNl14PKri4LU%2FEFaqBdp%2FD2580gSYrTpsH52p%2B9AblI%3D",
+                "contentHash": "CCB7B8EFBFB52CEEC9F8DB373B2B16D9D23E6C13049B4D5D638F71B3530CD303",
                 "configurationParameter": {
+                    "Ensure": "[Registry]RegistryAssertion;Ensure",
                     "Registry Key": "[Registry]RegistryAssertion;Key",
                     "Registry ValueName": "[Registry]RegistryAssertion;ValueName",
-                    "Registry ValueData": "[Registry]RegistryAssertion;ValueData",
-                    "Ensure": "[Registry]RegistryAssertion;Ensure"
+                    "Registry ValueData": "[Registry]RegistryAssertion;ValueData"
                 }
             }
         },
@@ -37,6 +37,18 @@
                     "false"
                 ],
                 "defaultValue": "false"
+            },
+            "Ensure": {
+                "type": "string",
+                "metadata": {
+                    "displayName": "Ensure",
+                    "description": "Ensure either Registry Key/ValueData is Present | Absent"
+                },
+                "defaultValue": "Present",
+                "allowedValues": [
+                    "Present",
+                    "Absent"
+                ]
             },
             "Registry Key": {
                 "type": "string",
@@ -64,18 +76,6 @@
                         },
                         "defaultValue": "",
                         "allowedValues": []
-                        },
-                        "Ensure": {
-                            "type": "string",
-                            "metadata": {
-                                "displayName": "Ensure",
-                                "description": "Ensure either Registry Key/ValueData is Present | Absent"
-                            },
-                            "defaultValue": "Present",
-                            "allowedValues": [
-                                "Present",
-                                "Absent"
-                            ]
                         }
                     },
                     "policyRule": {
@@ -315,7 +315,7 @@
                                         },
                                         {
                                             "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/parameterHash",
-                                            "equals": "[base64(concat('[Registry]RegistryAssertion;Key', '=', parameters('Registry Key'), ',', '[Registry]RegistryAssertion;ValueName', '=', parameters('Registry ValueName'), ',', '[Registry]RegistryAssertion;ValueData', '=', parameters('Registry ValueData'), ',', '[Registry]RegistryAssertion;Ensure', '=', parameters('Ensure')))]"
+                                            "equals": "[base64(concat('[Registry]RegistryAssertion;Ensure', '=', parameters('Ensure'), ',', '[Registry]RegistryAssertion;Key', '=', parameters('Registry Key'), ',', '[Registry]RegistryAssertion;ValueName', '=', parameters('Registry ValueName'), ',', '[Registry]RegistryAssertion;ValueData', '=', parameters('Registry ValueData')))]"
                                         }
                                     ]
                                 }
@@ -323,5 +323,5 @@
                         }
                     }
                 },
-                "name": "3079ed55-27d4-46c2-80fe-b07d18048159"
+                "name": "67f0bf3d-0885-4a1c-9ac4-f97d83d9dc04"
             }
