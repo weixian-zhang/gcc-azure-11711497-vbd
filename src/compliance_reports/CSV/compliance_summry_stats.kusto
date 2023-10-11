@@ -1,0 +1,43 @@
+// let GetMonth = view(Month:int){ case(Month==1, "January", Month==2, "February", Month==3, "March", Month==4, "April", Month==5, "May", Month==6, "June", Month==7, "July", Month==8, "August", Month==9, "September", Month==10, "October", Month==11, "November", Month==12, "December" )};
+
+PolicyResources
+| where type =~ 'Microsoft.PolicyInsights/PolicyStates'
+| extend complianceState = tostring(properties.complianceState)
+| extend
+	resourceId = tostring(properties.resourceId),
+	resourceType = tolower(tostring(properties.resourceType)),
+	policyAssignmentId = tostring(properties.policyAssignmentId),
+	policyDefinitionId = tostring(properties.policyDefinitionId),
+	policyDefinitionReferenceId = tostring(properties.policyDefinitionReferenceId),
+	stateWeight = iff(complianceState == 'NonCompliant', int(300), iff(complianceState == 'Compliant', int(200), iff(complianceState == 'Conflict', int(100), iff(complianceState == 'Exempt', int(50), int(0)))))
+| extend reviewAt =  tostring(datetime_add('hour', 8, todatetime(tostring(properties.timestamp))))
+| extend reviewAtFormatted = format_datetime(todatetime(reviewAt), "dd MM yyyy hh:mm:ss tt")
+| extend rscIdSplitted = split(properties.resourceId, '/')
+| extend rscName = tostring(rscIdSplitted[array_length(rscIdSplitted)-5])
+| extend policyAssignmentName = tostring(properties.policyAssignmentName)
+| where resourceType  =~ 'microsoft.compute/virtualmachines'
+| summarize max(stateWeight) by reviewAtFormatted, rscName, policyAssignmentName, resourceId, resourceType
+| summarize counts = count() by reviewAtFormatted, rscName, policyAssignmentName, resourceType, max_stateWeight
+| summarize overallStateWeight = max(max_stateWeight),
+nonCompliantCount = sumif(counts, max_stateWeight == 300),
+compliantCount = sumif(counts, max_stateWeight == 200),
+conflictCount = sumif(counts, max_stateWeight == 100),
+exemptCount = sumif(counts, max_stateWeight == 50) by resourceType,
+rscName = rscName,
+policyAssignmentName = policyAssignmentName,
+reviewAtFormatted = reviewAtFormatted,
+totalRuleCount = counts
+| extend totalResources = todouble(nonCompliantCount + compliantCount + conflictCount + exemptCount)
+| extend compliancePercentage = iff(totalResources == 0, todouble(100), 100 * todouble(compliantCount + exemptCount) / totalResources)
+| project
+    ["Review Started At"]=reviewAtFormatted,
+    rscName,
+    policyAssignmentName,
+    //resourceType,
+    overAllComplianceState = iff(overallStateWeight == 300, 'noncompliant', iff(overallStateWeight == 200, 'compliant', iff(overallStateWeight == 100, 'conflict', iff(overallStateWeight == 50, 'exempt', 'notstarted')))),
+    ['Rules Checked'] = totalRuleCount,
+    ['Rules Compliant'] = compliantCount,
+    ['Rules Non Compliant'] = nonCompliantCount,
+    conflictCount,
+    exemptCount,
+    ['% Compliance']=round(compliancePercentage,0)
