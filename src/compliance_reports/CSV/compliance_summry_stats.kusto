@@ -10,8 +10,16 @@ PolicyResources
 	policyDefinitionId = tostring(properties.policyDefinitionId),
 	policyDefinitionReferenceId = tostring(properties.policyDefinitionReferenceId),
 	stateWeight = iff(complianceState == 'NonCompliant', int(300), iff(complianceState == 'Compliant', int(200), iff(complianceState == 'Conflict', int(100), iff(complianceState == 'Exempt', int(50), int(0)))))
-| extend reviewAt =  tostring(datetime_add('hour', 8, todatetime(tostring(properties.timestamp))))
-| extend reviewAtFormatted = format_datetime(todatetime(reviewAt), "dd MM yyyy hh:mm:ss tt")
+
+// get requested datetime format
+| extend reviewAt =  todatetime(tostring(datetime_add('hour', 8, todatetime(tostring(properties.timestamp)))))
+| extend reviewAtAMPM = substring(format_datetime(reviewAt, 'yy MM dd hh:mm:ss tt'), -2, 2)
+| extend reviewAtMonth = getmonth(todatetime(tostring(properties.timestamp)))
+| extend reviewAtMonthName = case(reviewAtMonth==1, 'Jan', reviewAtMonth==2, 'Feb',reviewAtMonth==3, 'Mar',reviewAtMonth==4, 'Apr',reviewAtMonth==5, 'May',reviewAtMonth==6, 'Jun',reviewAtMonth==7, 'Jul',reviewAtMonth==8, 'Aug',reviewAtMonth==9, 'Sep',reviewAtMonth==10, 'Oct',reviewAtMonth==11, 'Nov',reviewAtMonth==12, 'Dec','')
+| extend reviewAtStr = strcat(datetime_part('day', reviewAt), ' ', reviewAtMonthName, ' ', datetime_part('year', reviewAt), ' ', datetime_part('hour', reviewAt), ':', datetime_part('minute', reviewAt), ':', datetime_part('second', reviewAt), ' ', reviewAtAMPM)
+| extend reviewAtFormatted = reviewAtStr
+
+
 | extend rscIdSplitted = split(properties.resourceId, '/')
 | extend rscName = tostring(rscIdSplitted[array_length(rscIdSplitted)-5])
 | extend policyAssignmentName = tostring(properties.policyAssignmentName)
