@@ -15,6 +15,10 @@
 * Within PosH scripting environment:
   * Install-Module GuestConfiguration -Verbose -Force
   * Install-Module PSDscResources -Verbose -Force
+* Local testing of DSC configuration
+  * [set WINRM TrustedHost](https://learn.microsoft.com/en-us/troubleshoot/windows-client/system-management-components/can-not-establish-ps-remote-session-winrm-aad-only-joined-machines#implicit-credentials-cant-be-used)  
+
+  * [Also add default SPN to host](https://learn.microsoft.com/en-us/troubleshoot/windows-client/system-management-components/can-not-establish-ps-remote-session-winrm-aad-only-joined-machines#default-spn-prefix-http-prevents-azure-ad-authentication)
 
 ### Steps to create a custom Azure Automanage Machine Configuration
 As describe in [Azure doc](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition)
@@ -25,3 +29,6 @@ As describe in [Azure doc](https://learn.microsoft.com/en-us/azure/governance/ma
 4. create a policy definition
 5. publish policy definition
 6. assign policy
+
+
+

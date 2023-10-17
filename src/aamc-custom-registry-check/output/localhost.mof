@@ -1,0 +1,39 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=weixzha
+@GenerationDate=10/03/2023 10:46:17
+@GenerationHost=WEIXIAN-SB3
+*/
+
+instance of MSFT_RegistryResource as $MSFT_RegistryResource1ref
+{
+ModuleVersion = "2.12.0.0";
+ SourceInfo = "C:\\Weixian\\Projects\\Azure-GCC\\gcc-azure-11711497-vbd\\src\\aamc-custom-registry-check\\dsc-configuration.ps1::11::5::Registry";
+ ModuleName = "PSDscResources";
+ ResourceID = "[Registry]RegistryAssertion";
+ ValueName = "\\Device\\KeyboardClass0";
+ Key = "HKEY_LOCAL_MACHINE\\HARDWARE\\DEVICEMAP\\KeyboardClass";
+ Ensure = "Present";
+ ValueData = {
+    "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\kbdclass"
+};
+ ConfigurationName = "RegistryAssertion";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="weixzha";
+
+                        GenerationDate="10/03/2023 10:46:17";
+
+                        GenerationHost="WEIXIAN-SB3";
+
+                        Name="RegistryAssertion";
+
+                    };
